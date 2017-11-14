@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "151406058389",
+    "firebase_url": "https://dndinnerapp.firebaseio.com",
+    "project_id": "dndinnerapp",
+    "storage_bucket": "dndinnerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151406058389:android:33a59c3e35b95c35",
+        "android_client_info": {
+          "package_name": "app.inner.drinkanddrivebrothers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151406058389-41p9ohh4jd322utgn7sg523lqpqogn5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.inner.drinkanddrivebrothers",
+            "certificate_hash": "3b949bda6ff9f2d44787ac9bb0a46c609af829de"
+          }
+        },
+        {
+          "client_id": "151406058389-0k852o0474rvk3lvtcv294dp6ok4cmkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc-2zAL3mvUwISmVFbokL1qqs-MnYfT_U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151406058389-0k852o0474rvk3lvtcv294dp6ok4cmkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
