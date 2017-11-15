@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "151406058389-dv9fckqood98r31g41icgl2q627auj8o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.inner.drinkanddrivebrothers",
+            "certificate_hash": "f6a3146bb779635275fdff668162d2677c2bfff7"
+          }
+        },
+        {
           "client_id": "151406058389-41p9ohh4jd322utgn7sg523lqpqogn5r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
