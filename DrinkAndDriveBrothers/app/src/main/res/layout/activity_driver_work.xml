@@ -34,9 +34,12 @@
     <Button
         android:id="@+id/btn_driver_work_finishDrive"
         android:text="приключи курс"
+        android:textColor="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:background="@drawable/main_button_shape"
+        />
     <Button
         android:id="@+id/btn_driver_finish_shift"
         android:layout_width="match_parent"
@@ -45,6 +48,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
+        android:background="@drawable/admin_button_shape"
         />
 
 </LinearLayout>

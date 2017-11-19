@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Продължи"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/main_button_shape"
         android:layout_margin="20sp"
         android:layout_weight="1"
         />

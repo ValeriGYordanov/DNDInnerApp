@@ -25,6 +25,8 @@
         android:layout_height="0dp"
         android:layout_margin="40dp"
         android:layout_weight="5"
+        android:background="@drawable/main_button_shape"
+        android:textColor="@color/colorWhite"
         android:text="Започни работа"
         />
 
@@ -32,6 +34,7 @@
         android:id="@+id/btn_admin_login"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/admin_button_shape"
         android:text="Админ"
         android:layout_weight="1"
         android:layout_margin="20dp"
