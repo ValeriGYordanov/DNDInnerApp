@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorBlack"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Шофьор : "
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:id="@+id/statistics_list_first_driver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Driver Name Here"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Шофьор : "
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:id="@+id/statistics_list_second_driver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2 Driver Name Here"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Номер на Клиент : "
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:id="@+id/statistics_list_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Client Phone Here"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Час на Курса : "
+            android:textColor="@color/colorWhite"
+            />
+
+        <TextView
+            android:id="@+id/statistics_list_course_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hour"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Километри на Курса : "
+            android:textColor="@color/colorWhite"
+            />
+
+        <TextView
+            android:id="@+id/statistics_list_course_km"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kilometres"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Цена : "
+            android:textColor="@color/colorWhite"
+            />
+
+        <TextView
+            android:id="@+id/statistics_list_course_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textColor="@color/colorWhite"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

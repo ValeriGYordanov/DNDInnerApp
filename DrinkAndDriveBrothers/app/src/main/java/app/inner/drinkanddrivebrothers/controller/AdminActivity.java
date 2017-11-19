@@ -1,9 +1,11 @@
 package app.inner.drinkanddrivebrothers.controller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +27,7 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button btnRegisterUser, btnStatistic;
+    private Button btnRegisterUser, btnStatistic, btnStatisticByDay;
     private DatabaseReference ref;
 
     @Override
@@ -35,6 +37,7 @@ public class AdminActivity extends AppCompatActivity {
 
         btnRegisterUser = findViewById(R.id.btn_admin_register);
         btnStatistic = findViewById(R.id.btn_admin_statistic);
+        btnStatisticByDay = findViewById(R.id.btn_admin_statistic_by_day);
 
         btnRegisterUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +45,50 @@ public class AdminActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+        btnStatistic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, StatisticActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnStatisticByDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminActivity.this);
+                builder.setTitle("Въведете Дата");
+
+                LinearLayout layout = new LinearLayout(AdminActivity.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                final EditText date = new EditText(AdminActivity.this);
+                date.setHint("yyyy-MM-dd");
+                date.setMaxLines(1);
+                date.setInputType(InputType.TYPE_CLASS_DATETIME);
+                layout.addView(date);
+                builder.setView(layout);
+                builder.setPositiveButton("Покажи", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(AdminActivity.this, StatisticActivity.class);
+                        intent.putExtra("By", date.getText().toString());
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Отказ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+            }
+        });
 
     }
 
     private void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Регистрация на потребител");
+        builder.setTitle("Регистрация на шофьор");
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);

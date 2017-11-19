@@ -1,8 +1,7 @@
-package app.inner.drinkanddrivebrothers.controller;
+package app.inner.drinkanddrivebrothers.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,7 @@ public class DriversRecView extends
         holder.clear();
 
         final User user = listUsers.get(position);
-        holder.selectionState.setText(user.getName() + ", " + user.getLastName());
+        holder.selectionState.setText(user.getName() + " " + user.getLastName());
 
         holder.selectionState.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -59,11 +58,9 @@ public class DriversRecView extends
                 if (isChecked) {
                     user.setChecked(true);
                     checkedUsers.put(position, user);
-                    Log.e("testche", " " + checkedUsers.size());
                 } else {
                     user.setChecked(false);
                     checkedUsers.remove(position);
-                    Log.e("testche", " " + checkedUsers.size());
                 }
 
             }
@@ -82,7 +79,6 @@ public class DriversRecView extends
     public ArrayList<User> getSelectedUsers() {
 
         ArrayList<User> selectedUsers = new ArrayList<>();
-        Log.e("testche", " " + checkedUsers.size());
         for (Iterator<Map.Entry<Integer, User>> it = checkedUsers.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry entry = it.next();
             User user = (User) entry.getValue();

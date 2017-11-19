@@ -5,32 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="20sp"
+    android:background="@color/colorBlack"
     android:gravity="center"
     tools:context="app.inner.drinkanddrivebrothers.controller.DriverWorkActivity">
-
-    <Button
-        android:id="@+id/btn_driver_work_startDrive"
-        android:text="започни курс"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/txt_driver_work_clientNumber"
         android:hint="телефонен номер"
+        android:inputType="number"
+        android:textColor="@color/colorWhite"
+        android:background="@color/transparentWhite"
+        android:gravity="center"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/txt_driver_work_km"
         android:hint="изминати километри"
+        android:inputType="number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:background="@color/transparentWhite"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/btn_driver_work_finishDrive"
         android:text="приключи курс"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"/>
+    <Button
+        android:id="@+id/btn_driver_finish_shift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Завърши Смяна!"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        />
 
 </LinearLayout>

@@ -5,21 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="20sp"
+    android:background="@color/colorBlack"
     tools:context="app.inner.drinkanddrivebrothers.controller.AdminActivity">
 
     <Button
         android:id="@+id/btn_admin_register"
-        android:text="регистрирай потребител"
+        android:text="регистрирай шофьор"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
         android:layout_weight="1"/>
 
     <Button
         android:id="@+id/btn_admin_statistic"
-        android:text="статистика"
+        android:text="статистика за деня"
         android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <Button
+        android:id="@+id/btn_admin_statistic_by_day"
+        android:text="статистика по въведен ден"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

@@ -26,12 +26,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         btnStartWork = findViewById(R.id.btn_start_work);
-        Util.getDateAndTimeFormFirebase();
+        //Util.getDateAndTimeFormFirebase();
         btnStartWork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent nextAct = new Intent(LoginActivity.this, DriverActivity.class);
                 startActivity(nextAct);
+                finish();
             }
         });
         

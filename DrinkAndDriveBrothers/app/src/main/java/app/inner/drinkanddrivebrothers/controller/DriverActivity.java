@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,10 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.inner.drinkanddrivebrothers.R;
 import app.inner.drinkanddrivebrothers.model.User;
+import app.inner.drinkanddrivebrothers.recyclerview.DriversRecView;
 import app.inner.drinkanddrivebrothers.utility.Util;
 
 public class DriverActivity extends AppCompatActivity {
@@ -66,6 +65,7 @@ public class DriverActivity extends AppCompatActivity {
                     intent.putExtra("driver1",driver1Names);
                     intent.putExtra("driver2",driver2Names);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
