@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,12 +24,14 @@ import java.util.ArrayList;
 
 import app.inner.drinkanddrivebrothers.R;
 import app.inner.drinkanddrivebrothers.model.User;
+import app.inner.drinkanddrivebrothers.recyclerview.DriversRecView;
 import app.inner.drinkanddrivebrothers.utility.Util;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button btnRegisterUser, btnStatistic, btnStatisticByDay;
+    private Button btnRegisterUser, btnRemoveUser, btnStatistic, btnStatisticByDay;
     private DatabaseReference ref;
+    private ArrayList<User> allDrivers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,16 @@ public class AdminActivity extends AppCompatActivity {
         btnRegisterUser = findViewById(R.id.btn_admin_register);
         btnStatistic = findViewById(R.id.btn_admin_statistic);
         btnStatisticByDay = findViewById(R.id.btn_admin_statistic_by_day);
+        btnRemoveUser = findViewById(R.id.btn_admin_remove);
+
+        getDrivers();
+
+        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRemoveUserDialog();
+            }
+        });
 
         btnRegisterUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +99,72 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
+    private void openRemoveUserDialog() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(AdminActivity.this);
+        builderSingle.setTitle("Премахни шофьор");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.select_dialog_singlechoice);
+        for (int i = 0 ; i < allDrivers.size() ; i++){
+            arrayAdapter.add(allDrivers.get(i).getName() + " " + allDrivers.get(i).getLastName());
+        }
+
+        builderSingle.setNegativeButton("Затвори", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, int which) {
+                final String user = arrayAdapter.getItem(which);
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(AdminActivity.this);
+                builderInner.setTitle("Изтриване на:");
+                builderInner.setMessage(user);
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        deleteUserFromFirebase(user);
+                    }
+                });
+                builderInner.setNegativeButton("Затвори", new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialog.dismiss();
+                    }
+                });
+                builderInner.show();
+            }
+        });
+        builderSingle.show();
+    }
+
+    private void deleteUserFromFirebase(String userNames) {
+        String[] names = userNames.split(" ");
+        final String firstName = names[0];
+        final String lastName = names[1];
+        ref = Util.getFirebaseReference();
+        ref.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> childrens = dataSnapshot.getChildren();
+                for (DataSnapshot data : childrens) {
+                    User user = data.getValue(User.class);
+                    if(user.getName().equals(firstName) && user.getLastName().equals(lastName)){
+                        data.getRef().removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Регистрация на шофьор");
@@ -112,6 +191,7 @@ public class AdminActivity extends AppCompatActivity {
                 if (inputSurname.getText().toString().matches("[a-zA-Z ]+") && inputUsername.getText().toString().matches("[a-zA-Z ]+")) {
                     User user = new User(inputUsername.getText().toString(), inputSurname.getText().toString());
                     registerUser(user);
+                    getDrivers();
                 } else {
                     Toast.makeText(AdminActivity.this, "Невалидни полета...", Toast.LENGTH_SHORT).show();
                 }
@@ -131,5 +211,25 @@ public class AdminActivity extends AppCompatActivity {
     private void registerUser(User user) {
         ref = Util.getFirebaseReference();
         ref.child("drivers").push().setValue(user);
+    }
+
+    public void getDrivers() {
+        allDrivers = new ArrayList<>();
+        ref = Util.getFirebaseReference();
+        ref.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> childrens = dataSnapshot.getChildren();
+                for (DataSnapshot data : childrens) {
+                    User user = data.getValue(User.class);
+                    allDrivers.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

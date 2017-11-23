@@ -1,9 +1,11 @@
 package app.inner.drinkanddrivebrothers.controller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +33,7 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 public class DriverWorkActivity extends AppCompatActivity {
 
     private EditText txtPhoneNumber, txtKM;
-    private Button btnFinishDrive, btnStartDrive, btnFinishShift;
+    private Button btnFinishDrive, btnStartDrive, btnFinishShift, btnShowCourses;
     private DatabaseReference ref;
     private String driver1Names, driver2Names;
 
@@ -47,6 +49,7 @@ public class DriverWorkActivity extends AppCompatActivity {
         txtKM = findViewById(R.id.txt_driver_work_km);
         btnFinishDrive = findViewById(R.id.btn_driver_work_finishDrive);
         btnFinishShift = findViewById(R.id.btn_driver_finish_shift);
+        btnShowCourses = findViewById(R.id.btn_driver_open_courses);
         btnListeners();
     }
 
@@ -57,6 +60,29 @@ public class DriverWorkActivity extends AppCompatActivity {
 //                // get date and time form firebase
 //            }
 //        });
+
+        btnShowCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String day = Util.getFormatedDay();
+                String hour = Util.getFormatedHour(DriverWorkActivity.this);
+
+                String[] hourSplited = hour.split(":");
+                char firstDigit = hourSplited[0].charAt(0);
+
+                if(String.valueOf(firstDigit).equals("0")){
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.DATE, -1);
+                    SimpleDateFormat previousDay = new SimpleDateFormat("yyyy-MM-dd");
+                    day = previousDay.format(cal.getTime());
+                }
+                Intent intent = new Intent(DriverWorkActivity.this,CurrentStatsActivity.class);
+                intent.putExtra("driver1Names",driver1Names);
+                intent.putExtra("driver2Names",driver2Names);
+                intent.putExtra("date",day);
+                startActivity(intent);
+            }
+        });
 
         btnFinishDrive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +140,18 @@ public class DriverWorkActivity extends AppCompatActivity {
 
     private void saveCourseData() {
         String day = Util.getFormatedDay();
-        String hour = Util.getFormatedHour();
+        String hour = Util.getFormatedHour(this);
+
+        String[] hourSplited = hour.split(":");
+        char firstDigit = hourSplited[0].charAt(0);
+
+        if(String.valueOf(firstDigit).equals("0")){
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            SimpleDateFormat previousDay = new SimpleDateFormat("yyyy-MM-dd");
+            day = previousDay.format(cal.getTime());
+        }
+
         int kilos = Integer.valueOf(txtKM.getText().toString());
         Course course = new Course(txtPhoneNumber.getText().toString(), Float.parseFloat(txtKM.getText().toString()), driver1Names, driver2Names, hour, Util.getPriceFromKM(kilos));
         ref = Util.getFirebaseReference();

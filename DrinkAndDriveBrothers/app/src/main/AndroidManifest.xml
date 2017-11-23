@@ -19,7 +19,8 @@
         <activity android:name=".controller.DriverActivity" />
         <activity android:name=".controller.AdminActivity" />
         <activity android:name=".controller.DriverWorkActivity" />
-        <activity android:name=".controller.StatisticActivity"></activity>
+        <activity android:name=".controller.StatisticActivity" />
+        <activity android:name=".controller.CurrentStatsActivity"></activity>
     </application>
 
 </manifest>

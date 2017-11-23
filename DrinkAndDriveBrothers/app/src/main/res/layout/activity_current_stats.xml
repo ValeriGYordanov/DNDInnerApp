@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    tools:context="app.inner.drinkanddrivebrothers.controller.CurrentStatsActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/transparentWhite"
+        android:id="@+id/curr_stats_recycler"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="30sp"
+        android:layout_weight="12"
+        />
+
+    <Button
+        android:id="@+id/btn_recycler_curr_stats_back"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Назад"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/main_button_shape"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginBottom="20sp"
+        android:layout_weight="1"
+        />
+</LinearLayout>

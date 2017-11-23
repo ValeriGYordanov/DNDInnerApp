@@ -9,6 +9,16 @@
     android:gravity="center"
     tools:context="app.inner.drinkanddrivebrothers.controller.DriverWorkActivity">
 
+    <Button
+        android:id="@+id/btn_driver_open_courses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Виж курсовете за вечерта"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/admin_button_shape"
+        />
+
     <EditText
         android:id="@+id/txt_driver_work_clientNumber"
         android:hint="телефонен номер"

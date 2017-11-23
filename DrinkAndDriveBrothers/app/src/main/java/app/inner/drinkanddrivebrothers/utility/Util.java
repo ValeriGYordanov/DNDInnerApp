@@ -1,5 +1,7 @@
 package app.inner.drinkanddrivebrothers.utility;
 
+import android.app.Activity;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
@@ -8,7 +10,10 @@ import com.google.firebase.database.ServerValue;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import app.inner.drinkanddrivebrothers.model.User;
 
 
 /**
@@ -44,7 +49,7 @@ public final class Util {
         String formatedDay = day.format(cal.getTime());
         return formatedDay;
     }
-    public static String getFormatedHour(){
+    public static String getFormatedHour(Activity act){
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String formatedHour = hour.format(cal.getTime());
