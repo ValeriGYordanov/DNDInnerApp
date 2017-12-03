@@ -1,7 +1,10 @@
 package app.inner.drinkanddrivebrothers.controller;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private Button btnStartWork, btnAdminLogin;
     private final String usernameAdmin = "a";
     private final String passwordAdmin = "a";
@@ -26,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         btnStartWork = findViewById(R.id.btn_start_work);
+
         //Util.getDateAndTimeFormFirebase();
         btnStartWork.setOnClickListener(new View.OnClickListener() {
             @Override

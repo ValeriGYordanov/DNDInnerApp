@@ -1,6 +1,8 @@
 package app.inner.drinkanddrivebrothers.utility;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.text.format.DateFormat;
 import android.util.Log;
 
@@ -37,7 +39,7 @@ public final class Util {
         if (kilo <= 4){
             return price;
         }
-        for (int i = 4; i <= kilo; i++){
+        for (int i = 4; i < kilo; i++){ // тук не трябва ли да е само < kilo ? Примерно ако са 5км... то ще влезе 2 пъти...
             price += 1.50;
         }
         return price;
@@ -55,7 +57,13 @@ public final class Util {
         String formatedHour = hour.format(cal.getTime());
         return formatedHour;
     }
-
+    public static boolean checkPermission(Activity act){
+        if (ActivityCompat.checkSelfPermission(act, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(act, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }else{
+            return true;
+        }
+    }
 //    public String getTime() {
 //        try{
 //            //Make the Http connection so we can retrieve the time

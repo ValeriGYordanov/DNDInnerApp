@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -32,10 +34,11 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 
 public class DriverWorkActivity extends AppCompatActivity {
 
-    private EditText txtPhoneNumber, txtKM;
+    private EditText txtPhoneNumber;
+    private TextView txtKM, txtPrice;
     private Button btnFinishDrive, btnStartDrive, btnFinishShift, btnShowCourses;
     private DatabaseReference ref;
-    private String driver1Names, driver2Names;
+    private String driver1Names, driver2Names, kmString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +50,36 @@ public class DriverWorkActivity extends AppCompatActivity {
 
         txtPhoneNumber = findViewById(R.id.txt_driver_work_clientNumber);
         txtKM = findViewById(R.id.txt_driver_work_km);
-        btnFinishDrive = findViewById(R.id.btn_driver_work_finishDrive);
+        txtPrice = findViewById(R.id.txt_driver_work_price);
+        //btnFinishDrive = findViewById(R.id.btn_driver_work_finishDrive);
+        btnStartDrive = findViewById(R.id.btn_driver_work_startDrive);
         btnFinishShift = findViewById(R.id.btn_driver_finish_shift);
         btnShowCourses = findViewById(R.id.btn_driver_open_courses);
         btnListeners();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0 && data != null){
+            if(resultCode == 0){
+                float m = 0;
+                m = data.getExtras().getFloat("distance");
+                float km = m/1000;
+                int kmInt = Math.round(km);
+                double price = Util.getPriceFromKM(kmInt);
+                if (km == 0) {
+                    txtKM.setText("Изминато разстояние от последия курс: 0 км");
+                }else {
+                    kmString = String.format("%.03f", km);
+                    txtKM.setText("Изминато разстояние от последия курс: " + kmInt + " км");
+                    saveCourseData();
+                    txtPhoneNumber.setText("");
+                }
+                txtPrice.setText("Цена: " + String.valueOf(price) + " лева");
+            }
+        }
     }
 
     private void btnListeners() {
@@ -60,6 +89,18 @@ public class DriverWorkActivity extends AppCompatActivity {
 //                // get date and time form firebase
 //            }
 //        });
+
+        btnStartDrive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(txtPhoneNumber.getText().toString().trim().isEmpty()){
+                    Toast.makeText(DriverWorkActivity.this, "Въведете номер", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent(DriverWorkActivity.this,MapActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         btnShowCourses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +125,15 @@ public class DriverWorkActivity extends AppCompatActivity {
             }
         });
 
-        btnFinishDrive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // edna stabilna proverka na poletata trqbva tuk :D
-                saveCourseData();
-                txtPhoneNumber.setText("");
-                txtKM.setText("");
-            }
-        });
+//        btnFinishDrive.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // edna stabilna proverka na poletata trqbva tuk :D
+//                saveCourseData();
+//                txtPhoneNumber.setText("");
+//                txtKM.setText("");
+//            }
+//        });
         btnFinishShift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,8 +193,9 @@ public class DriverWorkActivity extends AppCompatActivity {
             day = previousDay.format(cal.getTime());
         }
 
-        int kilos = Integer.valueOf(txtKM.getText().toString());
-        Course course = new Course(txtPhoneNumber.getText().toString(), Float.parseFloat(txtKM.getText().toString()), driver1Names, driver2Names, hour, Util.getPriceFromKM(kilos));
+        float kilos = Float.valueOf(kmString);
+        int km = Math.round(kilos);
+        Course course = new Course(txtPhoneNumber.getText().toString(), km, driver1Names, driver2Names, hour, Util.getPriceFromKM(km));
         ref = Util.getFirebaseReference();
         ref.child("courses").child(day).push().setValue(course);
         ref.addValueEventListener(new ValueEventListener() {
