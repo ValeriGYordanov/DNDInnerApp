@@ -47,17 +47,7 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 public class MapActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback, DirectionFinderListener {
 
-    private static final String[] INITIAL_PERMS={
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-    private static final int INITIAL_REQUEST=1337;
-
-
     private static final int PLAY_SERVICES_REQUEST = 1000;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
 
     private List<Polyline> polylines;
     private PolylineOptions polyOpt;
@@ -76,7 +66,7 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.Co
     private static int DISPLACEMENT = 10;
 
     private EditText etDestination;
-    private Button btnStartLocationUpdates, btnClearLines, btnFindPath;
+    private Button btnStartLocationUpdates, btnFindPath;
     private float distance = 0;
 
     private List<Marker> originMarkers = new ArrayList<>();
@@ -88,14 +78,6 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-//        }
-
-//        ActivityCompat.requestPermissions(this,
-//                new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
-//                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
         etDestination = findViewById(R.id.etDestination);
         btnFindPath = findViewById(R.id.btnFindPath);
@@ -113,14 +95,6 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.Co
                 togglePeriodLocationUpdates();
             }
         });
-
-//        btnClearLines.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopLocationUpdates();
-//
-//            }
-//        });
 
         btnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
