@@ -37,7 +37,7 @@ public final class Util {
         if (kilo <= 4){
             return price;
         }
-        for (int i = 4; i <= kilo; i++){
+        for (int i = 4; i < kilo; i++){
             price += 1.50;
         }
         return price;

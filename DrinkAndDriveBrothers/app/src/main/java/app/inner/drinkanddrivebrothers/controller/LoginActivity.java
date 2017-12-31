@@ -18,8 +18,8 @@ import app.inner.drinkanddrivebrothers.utility.Util;
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnStartWork, btnAdminLogin;
-    private final String usernameAdmin = "a";
-    private final String passwordAdmin = "a";
+    private final String usernameAdmin = "admin";
+    private final String passwordAdmin = "010203";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
