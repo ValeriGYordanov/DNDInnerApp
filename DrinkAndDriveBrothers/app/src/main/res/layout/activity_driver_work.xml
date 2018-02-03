@@ -30,16 +30,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
+    <TextView
         android:id="@+id/txt_driver_work_km"
-        android:hint="изминати километри"
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
-        android:background="@color/transparentWhite"
         android:gravity="center"
-        android:layout_margin="20dp"/>
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_driver_work_price"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btn_driver_work_startDrive"
+        android:text="започни курс"
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/main_button_shape"
+        />
 
     <Button
         android:id="@+id/btn_driver_work_finishDrive"

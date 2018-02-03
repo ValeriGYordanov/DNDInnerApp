@@ -24,7 +24,7 @@ public class Course implements Serializable{
     public Course(){
     }
 
-    public Course(String number, float km, String driver1Names, String driver2Names, String hour, double price){
+    public Course(String number, int km, String driver1Names, String driver2Names, String hour, double price){
         this.number = number;
         this.km = km;
         this.driver1 = driver1Names;
